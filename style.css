@@ -1,0 +1,11 @@
+#cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#cards img {
+    width: 144px;
+    height: 215px;
+    object-fit: contain;
+}
