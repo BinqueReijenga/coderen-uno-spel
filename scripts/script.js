@@ -12,7 +12,7 @@ drawButton.addEventListener("click", () => {
     player1card.alt = randomCard;
 
     player1card.addEventListener("click", () => {
-    console.log(`Je klikte op: ${randomCard}`);
+    console.log(`You clicked: ${randomCard}`);
 });
 
     const cardNumber = cardsContainer.children.length;
@@ -21,10 +21,10 @@ drawButton.addEventListener("click", () => {
     cardsContainer.appendChild(player1card);
     cardsContainer.appendChild(player1card);
 
-    console.log(`Getrokken kaart: ${randomCard}`);
-    console.log(`Kaarten over: ${cards.length}`);
+    console.log(`chosen card: ${randomCard}`);
+    console.log(`Cards left: ${cards.length}`);
     player1Cards.push(randomCard);
     console.log(player1Cards);
 });
 
-console.log(`Start aantal kaarten: ${cards.length}`);
+console.log(`Start amount of cards: ${cards.length}`);

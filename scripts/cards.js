@@ -72,7 +72,7 @@ export const playedCards = [];
 
 export function getAndRemoveRandomCard(cards) {
     if(cards.length == 0){
-    alert("De kaarten zijn op!");
+    alert("There are no more cards left!");
     return;
     }
     const randomIndex = Math.floor(Math.random() * cards.length);
