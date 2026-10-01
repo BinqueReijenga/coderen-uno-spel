@@ -64,11 +64,10 @@ cards.push(
     ...Array(4).fill("Wild_Card_Change_Colour"),
     ...Array(4).fill("Wild_Card_Draw_4")
 );
-const playedCards = [];
 
-
-
-
+export const player1Cards = [];
+export const player2Cards = [];
+export const playedCards = [];
 
 
 export function getAndRemoveRandomCard(cards) {
@@ -77,11 +76,11 @@ export function getAndRemoveRandomCard(cards) {
     return;
     }
     const randomIndex = Math.floor(Math.random() * cards.length);
-
     const randomCard = cards.splice(randomIndex, 1)[0];
-
     return randomCard;
 }
+
+
 
 
 
