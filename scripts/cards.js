@@ -67,7 +67,7 @@ cards.push(
 
 export const player1Cards = [];
 export const player2Cards = [];
-export const playedCards = [];
+export const discardedCards = [];
 
 
 export function getAndRemoveRandomCard(cards) {
