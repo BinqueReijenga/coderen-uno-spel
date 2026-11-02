@@ -20,7 +20,6 @@ function otherPlayer(player) {
     return player === 1 ? 2 : 1;
 }
 
-// Banner die laat zien wie er aan de beurt is
 const turnInfo = document.createElement("div");
 turnInfo.id = "turnInfo";
 document.body.appendChild(turnInfo);
