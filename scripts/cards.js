@@ -1,6 +1,3 @@
-import { updateDiscardPile } from "./piles.js";
-
-
 const cards = [];
 cards.push(
     // Red cards
@@ -85,90 +82,51 @@ function getAndRemoveRandomCard(cards) {
 
 
 const cardsContainer = document.querySelector("#cards");
-export const drawButton = document.querySelector("#drawCard");
+const cardsContainer2 = document.querySelector("#cards2");
 
 
+function layoutContainer(container) {
+    const cardElements = [...container.querySelectorAll("img")];
+    container.innerHTML = "";
 
-
-function updateCards() {
-    const cardElements = [...cardsContainer.querySelectorAll("img")];
-    cardsContainer.innerHTML = "";
-    const cardWidth = 144;
-    const overlap = 30;
-    const spacePerCard = cardWidth - overlap;
+    const maxCardWidth = 144;
+    const cardHeightRatio = 215 / 144;
+    const overlapRatio = 30 / 144;
+    const minCardWidth = 30;
     const maxWidth = window.innerWidth - 40;
-    let cardsPerRow = Math.floor(
-        (maxWidth - overlap) / spacePerCard
-    );
-    if (cardsPerRow < 1) {
-        cardsPerRow = 1;
-    }
+    const n = Math.max(cardElements.length, 1);
 
-    const rows = [];
+    const widthForOneRow = maxWidth / (1 + (n - 1) * (1 - overlapRatio));
+    const cardWidth = Math.max(minCardWidth, Math.min(maxCardWidth, widthForOneRow));
+    const overlap = cardWidth * overlapRatio;
 
-    for (let i = 0; i < cardElements.length; i += cardsPerRow) {
-        rows.push(cardElements.slice(i, i + cardsPerRow));
-    }
+    container.style.display = "flex";
+    container.style.flexDirection = "column";
+    container.style.alignItems = "center";
 
-    cardsContainer.style.display = "flex";
-    cardsContainer.style.flexDirection = "column";
-    cardsContainer.style.alignItems = "center";
-    cardsContainer.style.gap = "10px";
-
-    rows.forEach(rowCards => {
-        const row = document.createElement("div");
-        row.style.display = "flex";
-        row.style.justifyContent = "center";
-        rowCards.forEach((card, index) => {
-            card.style.width = `${cardWidth}px`;
-            card.style.height = "215px";
-            card.style.objectFit = "contain";
-            card.style.marginLeft = index === 0 ? "0px" : `-${overlap}px`;
-            row.appendChild(card);
-        });
-
-        cardsContainer.appendChild(row);
+    const row = document.createElement("div");
+    row.style.display = "flex";
+    row.style.justifyContent = "center";
+    cardElements.forEach((card, index) => {
+        card.style.width = `${cardWidth}px`;
+        card.style.height = `${cardWidth * cardHeightRatio}px`;
+        card.style.objectFit = "contain";
+        card.style.marginLeft = index === 0 ? "0px" : `-${overlap}px`;
+        row.appendChild(card);
     });
+    container.appendChild(row);
+}
+
+// Tekent de kaarten van beide spelers opnieuw
+function updateCards() {
+    layoutContainer(cardsContainer);
+    layoutContainer(cardsContainer2);
 }
 
 
 window.addEventListener("resize", updateCards);
 
 
-drawButton.addEventListener("click", () => {
-    const randomCard = getAndRemoveRandomCard(cards);
-    if (!randomCard) {
-        console.log("Geen kaarten meer!");
-        return;
-    }
 
-    const player1card = document.createElement("img");
-    player1card.src = `cards/${randomCard}.png`;
-    player1card.alt = randomCard;
 
-    player1card.addEventListener("click", () => {
-        console.log(`You played: ${randomCard}`);
-        discardedCards.push(`cards/${randomCard}.png`);
-        const index = player1Cards.indexOf(randomCard);
-        if (index !== -1) {
-            player1Cards.splice(index, 1);
-        }
-
-        player1card.remove();
-        updateCards();
-        updateDiscardPile();
-
-        console.log("Player 1 cards:", player1Cards);
-        console.log("Discarded cards:", discardedCards);
-    });
-
-    cardsContainer.appendChild(player1card);
-    player1Cards.push(randomCard);
-    console.log(`Chosen card: ${randomCard}`);
-    console.log(`Cards left: ${cards.length}`);
-    console.log("Player 1 cards:", player1Cards);
-
-    updateCards();
-});
-
-export{cards, updateCards, getAndRemoveRandomCard};
+export{cards, updateCards, getAndRemoveRandomCard, cardsContainer, cardsContainer2};
