@@ -8,16 +8,11 @@ import {
 import {
     updateDiscardPile
 } from "./piles.js";
-import {
-    drawButton,
-    getLastCard
-} from "./rules.js";
+import { drawButton } from "./rules.js";
 
 
 
 updateDiscardPile();
 
-// getLastCard();
-// console.log("lastcard: " + getLastCard());
 
 console.log(`Start amount of cards: ${cards.length}`);

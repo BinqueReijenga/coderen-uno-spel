@@ -1,6 +1,7 @@
 import { discardedCards, getAndRemoveRandomCard, cards, player1Cards, player2Cards, cardsContainer, cardsContainer2, updateCards } from "./cards.js";
 import { updateDiscardPile } from "./piles.js";
 
+
 export const drawButton = document.querySelector("#drawCard");
 
 const VALID_COLORS = ["red", "blue", "green", "yellow"];
